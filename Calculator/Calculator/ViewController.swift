@@ -56,11 +56,11 @@ class ViewController: UIViewController {
         case "÷": performOperation { $1 / $0 }
         case "+": performOperation { $0 + $1 }
         case "−": performOperation { $1 - $0 }
-        case "√": performOperation { sqrt($0) }
-        case "sin": performOperation { sin($0) }
-        case "cos": performOperation { cos($0) }
+        case "√": performOperation1 { sqrt($0) }
+        case "sin": performOperation1 { sin($0) }
+        case "cos": performOperation1 { cos($0) }
         case "π": performOperation()
-        case "±": performOperation { $0 * -1 }
+        case "±": performOperation1 { $0 * -1 }
         default: break
         }
         userIsPerformedAnOperation = true
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func performOperation(operation: Double -> Double) {
+    func performOperation1(operation: Double -> Double) {
         if operandStack.count >= 1 {
             displayValue = operation(operandStack.removeLast())
         }
@@ -113,7 +113,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func backspace(sender: UIButton) {
-        if countElements(display.text!) > 1 {
+        if count(display.text!) > 1 {
             display.text = dropLast(display.text!)
         } else {
             clear(sender)
